@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Iceberg Search</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body ng-cloak>
+
+	<div ng-controller="mainController">
+
+ 		<section class="filter">
+ 			<h1>Iceberg Movies</h1>
+
+ 			<div class="input-group">
+				<span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="text" ng-keyup="getMoviesForPage(typeAhead, 0)" ng-model="typeAhead" placeholder="Search" />
+				<span class="matched" ng-show="typeAhead.length>2 && totalMoviesInSearch>0">Matched <span ng-bind="totalMoviesInSearch"></span> of <span ng-bind="totalMovies"></span> movies total</span>
+			</div>
+			<div>
+				<label ng-show="typeAhead.length>0 && typeAhead.length<3">Enter at least three characters to begin search</label>
+			</div>
+		</section>
+
+		<div class="movies-table">
+	 		<table ng-show="movies.length > 0">
+	 			<thead>
+	 				<tr>
+						<td>Title</td>
+						<td>Year</td>
+						<td>Rating</td>
+						<td>Duration (mins)</td>
+						<td>Actors</td>
+	 				</tr>
+	 			</thead>
+	 			<tbody>
+	 				<tr ng-repeat="movie in movies">
+	 					<td class="title"><span ng-bind="movie.title"></span></td>
+	 					<td><span ng-bind="movie.year"></span></td>
+	 					<td><span ng-bind="movie.rating"></span></td>
+	 					<td class="duration"><span ng-bind="(movie.duration / 60) | number : 0"></span></td>
+	 					<td><span ng-bind="$parent.getActors(movie)"></span></td>
+	 				</tr>
+	 			</tbody>
+	 		</table>
+
+	 		<div class="pagination-controls" ng-show="numberOfPages() > 1">
+			    <button ng-show="previousPageVisible" ng-click="getMoviesForPage(typeAhead, -1)">
+			        Previous
+			    </button>
+			    {{currentPage+1}}/{{numberOfPages()}}
+			    <button ng-show="nextPageVisible" ng-click="getMoviesForPage(typeAhead, 1)">
+			        Next
+			    </button>
+	 		</div>
+
+	 		<div ng-show="movies.length === 0">
+	 			<span>No matching items</span>
+	 		</div>
+		</div>
+
+	</div>
+
+	<script src="js/lib/angular.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
