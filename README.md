@@ -8,7 +8,7 @@ Imagine you're on a project and this code was the check-in by another member of 
 
 2. You've also noticed that no tests were written.  Can you suggest what tests you would write and how they might be structured?
 
-NOTE: We don't expect you to write any code or tests, just dot point in a document what changes you would make to the code and explain the process for each of the tests.
+NOTE: We don't expect you to write any code or tests, just dot point in a document what changes you would make to the code and explain the process for each of the tests in as much detail as possible.
 
 ## Commands to run:
 
